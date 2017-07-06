@@ -1,6 +1,7 @@
 use main_menu;
 use mini_menu;
 use sign_up;
+use sign_in;
 use parser;
 
 
@@ -26,7 +27,7 @@ pub fn service_list( request_service:String ) -> String {
             "About Encryptor doc".to_string()
         },
         "help" => {
-            "Welcome new user!!!\n
+            "\n==== Welcome new user!!! ====\n
             \t+ To start using our serveices type: start\n
             \t+ To get more info about our services type: info\n".to_string()
         },
@@ -34,7 +35,7 @@ pub fn service_list( request_service:String ) -> String {
             sign_up::sign_up_service(data)
         },
         "Sign-in" => {
-            "sign-in process".to_string()
+            sign_in::sign_in_service(data)
         },
         "Download" => {
             "download process".to_string()

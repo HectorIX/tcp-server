@@ -6,6 +6,7 @@ pub fn parser( instruction:String ) -> bool {
 
     if instruction.starts_with("informatic_state") |
        instruction.starts_with("sign_up_state")    |
+       instruction.starts_with("sign_in_state")    |
        instruction.starts_with("upload_state")     |
        instruction.starts_with("download_state")   |
        instruction.starts_with("integrity_state")  {
@@ -42,7 +43,7 @@ pub fn data_splitter( request_service:String ) -> (String,String) {
 }
 
 
-pub fn split_credentials(data:String) -> (String, String)  {
+pub fn split_credentials(data:String) -> (String,String)  {
 
     let data_vector: Vec<&str> = data.split("--").collect();
     let (username,password) = (data_vector[0].to_owned(), data_vector[1].to_owned());

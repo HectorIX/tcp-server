@@ -22,6 +22,7 @@ mod encryptor_services_list;
 mod parser;
 mod file_io;
 mod sign_up;
+mod sign_in;
 
 
 
@@ -107,7 +108,7 @@ impl Service for Encryptor {
         else {
             future::ok("That was nasty! But failed ;-).\n".to_owned()).boxed()
         }
-        
+
 
     }
 }
