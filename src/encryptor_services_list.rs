@@ -2,17 +2,19 @@ use service_state;
 use main_menu;
 use mini_menu;
 use sign_up;
+use parser;
 
 
 
 pub fn service_list( request_service:String ) -> String {
 
-    let service_and_data = data_splitter(request_service);
+    let service_and_data = parser::data_splitter(request_service);
 
     let service = service_and_data.0;
     let data = service_and_data.1;
 
-
+    println!("service = {:?}", service );
+    println!("data = {:?}", data  );
     match service.as_ref() {
 
         "start" => {
@@ -50,12 +52,4 @@ pub fn service_list( request_service:String ) -> String {
 
 
     }
-}
-
-fn data_splitter( request_service:String ) -> (String,String) {
-
-    let req_vector: Vec<&str> = request_service.split("**").collect();
-    let (service,data) = (req_vector[0].to_string(), req_vector[1].to_string());
-
-    (service, data)
 }

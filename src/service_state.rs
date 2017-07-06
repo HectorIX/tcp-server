@@ -1,14 +1,16 @@
 use encryptor_services_list;
-
+use parser;
 
 
 pub fn state( client_request:String ) -> String {
 
-    let state_tupple = request_splitter(client_request);
+    let state_tupple = parser::request_splitter(client_request);
 
     let the_state = state_tupple.0;
     let the_request = state_tupple.1;
 
+    println!("state = {:?}", the_state );
+    println!("the_request = {:?}", the_request);
 
     match the_state.as_ref() {
 
@@ -32,12 +34,4 @@ pub fn state( client_request:String ) -> String {
         },
 
     }
-}
-
-fn request_splitter( client_request:String ) -> (String,String) {
-
-    let req_vector: Vec<&str> = client_request.split("::").collect();
-    let (the_state,request) = (req_vector[0].to_string(), req_vector[1].to_string());
-
-    (the_state, request)
 }

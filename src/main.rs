@@ -19,6 +19,7 @@ mod mini_menu;
 mod main_menu;
 mod service_state;
 mod encryptor_services_list;
+mod parser;
 mod file_io;
 mod sign_up;
 
@@ -99,9 +100,16 @@ impl Service for Encryptor {
     fn call(&self, req: Self::Request) -> Self::Future {
         // In this case, the response is immediate.
         println!("{:?}", req );
-        future::ok(service_state::state(req)).boxed()
+
+        if parser::parser(req.to_owned()) {
+            future::ok(service_state::state(req)).boxed()
+        }
+        else {
+            future::ok("That was nasty! But failed ;-).\n".to_owned()).boxed()
+        }
+        //future::ok(service_state::state(req)).boxed()
         //future::ok(req+" HectorIX").boxed();
-        //future::ok(encryptor_services_list::service_list(req)).boxed()
+
     }
 }
 
