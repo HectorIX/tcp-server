@@ -107,8 +107,7 @@ impl Service for Encryptor {
         else {
             future::ok("That was nasty! But failed ;-).\n".to_owned()).boxed()
         }
-        //future::ok(service_state::state(req)).boxed()
-        //future::ok(req+" HectorIX").boxed();
+        
 
     }
 }

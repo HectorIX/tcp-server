@@ -10,7 +10,7 @@ use std::fs::{File, OpenOptions};
 pub fn write_file( filename:String, context:String ) {
 
 
-    // Create the File.
+    // Create the File if not already exists.
     let mut file = match OpenOptions::new()
                                     .read(true)
                                     .write(true)
@@ -46,12 +46,14 @@ pub fn read_file( filename:String ) -> String {
 
 
     // Open the File.
-    let mut file = match File::open(&filename) {
+    let mut file = match OpenOptions::new()
+                                     .read(true)
+                                     .open(&filename) {
 
         Err(failure) => panic!("System failed to create File {} because of: {}",
-                        filename,
-                        failure.description()
-                    ),
+                                filename,
+                                failure.description()
+                              ),
         Ok(file) => file,
     };
 
@@ -64,7 +66,7 @@ pub fn read_file( filename:String ) -> String {
 
         Err(failure) => {
                 panic!("Couldn't read from {}: {}", filename
-                                                 , failure.description())
+                                                  , failure.description())
                 },
         Ok(_) => println!("Message successfully read from {}.", filename),
     };
