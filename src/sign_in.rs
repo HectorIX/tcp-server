@@ -52,11 +52,11 @@ pub fn sign_in_service(credentials:String) -> String {
 fn verify_user( path:String, username:String, password:String ) -> bool {
 
     let file_context:String = file_io::read_file(path);
+    let vector_of_users: Vec<&str> = file_context.split("<**>\n").collect();
 
-
-    let vector_of_users: Vec<&str> = file_context.split("<**>").collect();
 
     for user_data in vector_of_users {
+
 
         if user_data.to_string().contains(username.as_str()) {
 
@@ -70,18 +70,6 @@ fn verify_user( path:String, username:String, password:String ) -> bool {
         }
     }
 
-    /*
-    if file_context.contains(username.as_str()) {
-
-        let legitimate_password = "myPass".to_string();
-
-        match password {
-
-            _ if legitimate_password == password =>  { return true; }
-            _ => {return false;}
-        }
-    }
-    */
 
     false
 }

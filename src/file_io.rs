@@ -1,6 +1,6 @@
 use std::error::Error;
 use std::io::prelude::*;
-use std::fs::{File, OpenOptions};
+use std::fs::{OpenOptions};
 
 
 // Write a message to the given file name.

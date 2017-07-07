@@ -8,10 +8,10 @@ pub fn sign_up_service(data:String) -> String {
     let (username, password) = parser::split_credentials(data);
     let mut credentials = "<**>\n".to_owned();
 
-    credentials.push_str("username:=");
+    credentials.push_str("username::");
     credentials.push_str(&username);
     credentials.push_str("\n");
-    credentials.push_str("password:=");
+    credentials.push_str("password::");
     credentials.push_str(&password);
     credentials.push_str("\n");
     credentials.push_str("ID::");
