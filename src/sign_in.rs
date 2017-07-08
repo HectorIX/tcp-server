@@ -5,41 +5,48 @@ use parser;
 use file_io;
 
 use std::str;
+use std::default::Default;
+
 use self::rand::{ thread_rng, Rng };
 use self::crypto::whirlpool::Whirlpool;
 use self::crypto::digest::Digest;
 
 
-struct User {
+#[derive(Default)]
+pub struct User {
 
     id : u64,
     username : String,
     session_key : String,
 }
 
-trait Whoami {
 
-    fn username(&self) -> String;
-    fn session_key(&self) -> String;
-    fn id(&self) -> u64;
+impl User {
+
+    fn get_username(&self) -> &String {
+
+        &self.username
+    }
+
+    fn get_session_key(&self) -> &String {
+
+        &self.session_key
+    }
+
+    fn set_username(&mut self) -> &mut String {
+
+        &mut self.username
+    }
+
+    fn set_session_key(&mut self) -> &mut String {
+
+        &mut self.session_key
+    }
+
 }
 
-impl Whoami for User {
 
-    fn username(&self) -> String {
-        //self.username
-        "user".to_string()
-    }
 
-    fn session_key(&self) -> String {
-        //self.session_key
-        "key".to_string()
-    }
-
-    fn id(&self) -> u64 {
-        self.id
-    }
-}
 
 pub fn sign_in_service(credentials:String) -> String {
 
@@ -49,8 +56,13 @@ pub fn sign_in_service(credentials:String) -> String {
 
     if verify_user(path.to_string(), username.clone(), password) {
 
-        println!("session_key = {:?}", session_key_maker());
-        format!("\n\n\t=== Welcome {}! ===\n", username.clone())
+        let mut verified_user = User::default();
+
+        verified_user.username = username.clone();
+        verified_user.session_key = session_key_maker();
+
+        println!("session_key = {:?}", verified_user.get_session_key());
+        format!("\n\n\t=== Welcome {}! ===\n", verified_user.get_username())
     }
     else {
         format!("\n\n\t*** Either your username or password are incorrect.\n
