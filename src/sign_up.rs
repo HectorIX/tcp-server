@@ -8,21 +8,44 @@ pub fn sign_up_service(data:String) -> String {
     let (username, password) = parser::split_credentials(data);
     let mut credentials = "<**>\n".to_owned();
 
-    credentials.push_str("username::");
-    credentials.push_str(&username);
-    credentials.push_str("\n");
-    credentials.push_str("password::");
-    credentials.push_str(&password);
-    credentials.push_str("\n");
-    credentials.push_str("ID::");
-    credentials.push_str(&next_id(path.to_string()));
-    credentials.push_str("\n");
 
-    file_io::write_file(path.to_string(), credentials.to_owned());
+    if !dublicate_username(path.to_string(), username.clone()) {
 
-    format!("Congradulation {}! You signed up successfully!\n", username)
+        credentials.push_str("username::");
+        credentials.push_str(&username);
+        credentials.push_str("\n");
+        credentials.push_str("password::");
+        credentials.push_str(&password);
+        credentials.push_str("\n");
+        credentials.push_str("ID::");
+        credentials.push_str(&next_id(path.to_string()));
+        credentials.push_str("\n");
+
+        file_io::write_file(path.to_string(), credentials.to_owned());
+
+        format!("Congradulation {}! You signed up successfully!\n", username.clone())
+
+    }
+    else {
+
+        format!("Username {} already exists! Please try another one...\n", username.clone())
+    }
+
 }
 
+
+
+fn dublicate_username(path:String, username:String) -> bool {
+
+    let file_context = file_io::read_file(path);
+
+    //if file_context.contains(username.as_ref()) {
+
+    //    return true;
+    //}
+
+    false
+}
 
 fn next_id(path:String) -> String {
 

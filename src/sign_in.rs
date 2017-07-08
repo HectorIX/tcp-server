@@ -15,7 +15,7 @@ use self::crypto::digest::Digest;
 #[derive(Default)]
 pub struct User {
 
-    id : u64,
+    //id : u64,
     username : String,
     session_key : String,
 }
@@ -32,7 +32,7 @@ impl User {
 
         &self.session_key
     }
-
+    /*
     fn set_username(&mut self) -> &mut String {
 
         &mut self.username
@@ -42,6 +42,7 @@ impl User {
 
         &mut self.session_key
     }
+    */
 
 }
 
