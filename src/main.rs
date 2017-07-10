@@ -23,6 +23,7 @@ mod parser;
 mod file_io;
 mod sign_up;
 mod sign_in;
+mod upload;
 
 
 
@@ -106,7 +107,7 @@ impl Service for Encryptor {
             future::ok(service_state::state(req)).boxed()
         }
         else {
-            future::ok("That was nasty! But failed ;-).\n".to_owned()).boxed()
+            future::ok(">".to_owned()).boxed()
         }
 
 
@@ -120,7 +121,7 @@ impl Service for Encryptor {
 
 fn main() {
     // Specify the localhost address
-    let addr = "127.0.0.1:12345".parse().unwrap();
+    let addr = "127.0.0.1:4000".parse().unwrap();
 
     // The builder requires a protocol and an address
     let server = TcpServer::new(LineProto, addr);
