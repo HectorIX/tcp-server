@@ -21,13 +21,6 @@ pub fn main_menu() -> String {
                                     exit,
                                     sign_up,
                                     sign_in,
-
-    format!{ "{} {} {} {} {} {} {}",
-                                    horizontal_line,
-                                    header,
-                                    exit,
-                                    sign_up,
-                                    sign_in,
                                     upload,
                                     download,
                                     integrity,
