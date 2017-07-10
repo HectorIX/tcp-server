@@ -2,6 +2,7 @@ use main_menu;
 use mini_menu;
 use sign_up;
 use sign_in;
+use upload;
 use parser;
 
 
@@ -27,9 +28,9 @@ pub fn service_list( request_service:String ) -> String {
             "About Encryptor doc".to_string()
         },
         "help" => {
-            "\n==== Welcome new user!!! ====\n
-            \t+ To start using our serveices type: start\n
-            \t+ To get more info about our services type: info\n".to_string()
+            "\n\t\t============== Welcome new user!!! ==============\n
+            \t<+> To use our clinet side services type: local
+            \t<+> To use our server side services type: net\n".to_string()
         },
         "Sign-up" => {
             sign_up::sign_up_service(data)
@@ -41,7 +42,7 @@ pub fn service_list( request_service:String ) -> String {
             "download process".to_string()
         },
         "Upload" => {
-            "upload process".to_string()
+            upload::upload_service(data)
         },
         "Integrity" => {
             "integrity verification".to_string()
