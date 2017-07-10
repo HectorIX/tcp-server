@@ -28,7 +28,8 @@ pub fn sign_up_service(data:String) -> String {
     }
     else {
 
-        format!("Username {} already exists! Please try another one...\n", username.clone())
+        format!("\n\t ** Username {} already exists! \n
+                 \tPlease try another one...\n", username.clone())
     }
 
 }
@@ -38,11 +39,16 @@ pub fn sign_up_service(data:String) -> String {
 fn dublicate_username(path:String, username:String) -> bool {
 
     let file_context = file_io::read_file(path);
+    let vector_of_users: Vec<&str> = file_context.split("<**>\n")
+                                                 .collect();
 
-    //if file_context.contains(username.as_ref()) {
+    for user_data in vector_of_users {
 
-    //    return true;
-    //}
+        if user_data.to_string().contains(username.as_str()) {
+
+            return true;
+        }
+    }
 
     false
 }
