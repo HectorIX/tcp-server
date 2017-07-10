@@ -1,0 +1,13 @@
+[package]
+name = "tcp-server"
+version = "0.1.0"
+authors = ["HectorIX <giorgoschiotis@protonmail.com>"]
+
+[dependencies]
+bytes = "*"
+futures = "*"
+tokio-io = "*"
+tokio-proto = "*"
+tokio-service = "*"
+rust-crypto = "^0.2"
+rand = "^0.3"
