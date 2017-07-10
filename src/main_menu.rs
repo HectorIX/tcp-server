@@ -2,6 +2,7 @@
 
 pub fn main_menu() -> String {
 
+
     let horizontal_line = "==============================================================\n";
     let header    = "\t\t      SERVER MENU\n\n";
     let exit      = "\t <:> To exit type: Exit\n";
@@ -13,7 +14,15 @@ pub fn main_menu() -> String {
 
 
 
+
     format!{ "{} {} {} {} {} {} {} {} {}",
+                                    horizontal_line,
+                                    header,
+                                    exit,
+                                    sign_up,
+                                    sign_in,
+
+    format!{ "{} {} {} {} {} {} {}",
                                     horizontal_line,
                                     header,
                                     exit,
