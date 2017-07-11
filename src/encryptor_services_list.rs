@@ -28,9 +28,9 @@ pub fn service_list( request_service:String ) -> String {
             "About Encryptor doc".to_string()
         },
         "help" => {
-            "\n\t\t============== Welcome new user!!! ==============\n
-            \t<+> To use our clinet side services type: local
-            \t<+> To use our server side services type: net\n".to_string()
+            "\n\t   ================   HELP MENU   ===================\n
+            <+> To use our clinet side services type: local
+            <+> To use our server side services type: net\n".to_string()
         },
         "Sign-up" => {
             sign_up::sign_up_service(data)
@@ -38,11 +38,11 @@ pub fn service_list( request_service:String ) -> String {
         "Sign-in" => {
             sign_in::sign_in_service(data)
         },
-        "Download" => {
-            "download process".to_string()
-        },
         "Upload" => {
             upload::upload_service(data)
+        },
+        "Download" => {
+            "download process".to_string()
         },
         "Integrity" => {
             "integrity verification".to_string()

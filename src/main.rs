@@ -121,7 +121,7 @@ impl Service for Encryptor {
 
 fn main() {
     // Specify the localhost address
-    let addr = "127.0.0.1:4000".parse().unwrap();
+    let addr = "127.0.0.1:5000".parse().unwrap();
 
     // The builder requires a protocol and an address
     let server = TcpServer::new(LineProto, addr);

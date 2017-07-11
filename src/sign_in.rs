@@ -50,8 +50,9 @@ pub fn sign_in_service(credentials:String) -> String {
         verified_user.username = username.clone();
         verified_user.session_key = session_key_maker();
 
-        println!("session_key = {:?}", verified_user.get_session_key());
-        format!("\n\n\t=== Welcome {}! ===\n", verified_user.get_username())
+
+        format!("\n\n\t=== Welcome {}! ===\nsession_key::{}", verified_user.get_username()
+                                                            , verified_user.get_session_key())
     }
     else {
         format!("\n\n\t*** Either your username or password are incorrect.\n
