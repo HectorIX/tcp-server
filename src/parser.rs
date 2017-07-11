@@ -25,7 +25,7 @@ pub fn parser( instruction:String ) -> bool {
 }
 
 
-pub fn request_splitter( client_request:String ) -> (String,String) {
+pub fn request_splitter( client_request:String ) -> (String, String) {
 
     let req_vector: Vec<&str> = client_request.split("::").collect();
     let (the_state,request) = (req_vector[0].to_string(), req_vector[1].to_string());
@@ -34,7 +34,7 @@ pub fn request_splitter( client_request:String ) -> (String,String) {
 }
 
 
-pub fn data_splitter( request_service:String ) -> (String,String) {
+pub fn data_splitter( request_service:String ) -> (String, String) {
 
     let req_vector: Vec<&str> = request_service.split("**").collect();
     let (service,data) = (req_vector[0].to_string(), req_vector[1].to_string());
@@ -43,10 +43,19 @@ pub fn data_splitter( request_service:String ) -> (String,String) {
 }
 
 
-pub fn split_credentials(data:String) -> (String,String)  {
+pub fn split_credentials(data:String) -> (String, String)  {
 
     let data_vector: Vec<&str> = data.split("--").collect();
     let (username,password) = (data_vector[0].to_owned(), data_vector[1].to_owned());
 
-    (username,password)
+    (username, password)
+}
+
+
+pub fn split_filename_from_context(data:String) -> (String, String)  {
+
+    let data_vector: Vec<&str> = data.split("<$$>").collect();
+    let (filename, file_context) = (data_vector[0].to_owned(), data_vector[1].to_owned());
+
+    (filename, file_context)
 }
