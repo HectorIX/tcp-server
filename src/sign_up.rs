@@ -23,13 +23,12 @@ pub fn sign_up_service(data:String) -> String {
 
         file_io::write_file(path.to_string(), credentials.to_owned());
 
-        format!("Congradulation {}! You signed up successfully!\n", username.clone())
+        format!("sign_up_state::OK**")
 
     }
     else {
 
-        format!("\n\t ** Username {} already exists! \n
-                 \tPlease try another one...\n", username.clone())
+        format!("sign_up_state::Dublicate**")
     }
 
 }
