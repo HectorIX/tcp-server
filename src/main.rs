@@ -15,8 +15,7 @@ use futures::{future, Future, BoxFuture};
 use tokio_proto::TcpServer;
 use tokio_proto::pipeline::ServerProto;
 
-mod mini_menu;
-mod main_menu;
+
 mod service_state;
 mod encryptor_services_list;
 mod parser;

@@ -1,5 +1,3 @@
-use main_menu;
-use mini_menu;
 use sign_up;
 use sign_in;
 use upload;
@@ -18,20 +16,6 @@ pub fn service_list( request_service:String ) -> String {
     println!("data = {:?}", data  );
     match service.as_ref() {
 
-        "start" => {
-            mini_menu::mini_menu()
-        },
-        "menu" => {
-            main_menu::main_menu()
-        },
-        "info" => {
-            "About Encryptor doc".to_string()
-        },
-        "help" => {
-            "\n\t   ================   HELP MENU   ===================\n
-            <+> To use our clinet side services type: local
-            <+> To use our server side services type: net\n".to_string()
-        },
         "Sign-up" => {
             sign_up::sign_up_service(data)
         },
@@ -43,9 +27,6 @@ pub fn service_list( request_service:String ) -> String {
         },
         "Download" => {
             "download process".to_string()
-        },
-        "Integrity" => {
-            "integrity verification".to_string()
         },
         _ => {
             "A typpo error! Please try again...\n[Tip: type help]\n".to_string()
