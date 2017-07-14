@@ -50,9 +50,9 @@ pub fn sign_in_service(credentials:String) -> String {
         verified_user.username = username.clone();
         verified_user.session_key = session_key_maker();
 
-        format!("sign_in_state::OK**{}--{}", verified_user.get_username()
-                                           , verified_user.get_session_key())
-        
+        format!("sign_in_state::OK**{}--{}", verified_user.get_session_key()
+                                           , verified_user.get_username())
+
     }
     else {
 
