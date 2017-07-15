@@ -34,7 +34,7 @@ impl Decoder for LineCodec {
     type Error = io::Error;
 
     fn decode(&mut self, buf: &mut BytesMut) -> io::Result<Option<String>> {
-        let mut i;
+        let i;
         if buf.len() > 0 {
 
             i = buf.len();
