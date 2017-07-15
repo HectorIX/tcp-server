@@ -23,6 +23,7 @@ mod file_io;
 mod sign_up;
 mod sign_in;
 mod upload;
+mod download;
 
 
 

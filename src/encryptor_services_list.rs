@@ -1,6 +1,7 @@
 use sign_up;
 use sign_in;
 use upload;
+use download;
 use parser;
 
 
@@ -13,22 +14,27 @@ pub fn service_list( request_service:String ) -> String {
     let data = service_and_data.1;
 
     println!("service = {:?}", service );
-    println!("data = {:?}", data  );
+    println!("data = {:?}", data );
     match service.as_ref() {
 
         "Sign-up" => {
+
             sign_up::sign_up_service(data)
         },
         "Sign-in" => {
+
             sign_in::sign_in_service(data)
         },
         "Upload" => {
+
             upload::upload_service(data)
         },
         "Download" => {
-            "download process".to_string()
+
+            download::download_service(data)
         },
         _ => {
+
             "A typpo error! Please try again...\n[Tip: type help]\n".to_string()
         },
 
