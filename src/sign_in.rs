@@ -39,25 +39,33 @@ impl User {
 
 pub fn sign_in_service(credentials:String) -> String {
 
-    let path = "database/user-credentials.txt";
-    let (username,password) = parser::split_credentials(credentials);
+
+    if credentials.len() > 0 {
+
+        let path = "database/user-credentials.txt";
+        let (username,password) = parser::split_credentials(credentials);
 
 
-    if verify_user(path.to_string(), username.clone(), password) {
+        if verify_user(path.to_string(), username.clone(), password) {
 
-        let mut verified_user = User::default();
+            let mut verified_user = User::default();
 
-        verified_user.username = username.clone();
-        verified_user.session_key = session_key_maker();
+            verified_user.username = username.clone();
+            verified_user.session_key = session_key_maker();
 
-        format!("sign_in_state::OK**{}--{}", verified_user.get_session_key()
-                                           , verified_user.get_username())
+            format!("sign_in_state::OK**{}--{}", verified_user.get_session_key()
+                                               , verified_user.get_username())
 
+        }
+        else {
+
+            format!("sign_in_state::NOT_Mactching**")
+
+        }
     }
     else {
 
-        format!("sign_in_state::Error**")
-
+        format!("sign_in_state::ALREADY_Sign_in**")
     }
 
 }

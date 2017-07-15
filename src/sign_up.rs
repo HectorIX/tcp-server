@@ -4,31 +4,39 @@ use parser;
 
 pub fn sign_up_service(data:String) -> String {
 
-    let path = "database/user-credentials.txt";
-    let (username, password) = parser::split_credentials(data);
-    let mut credentials = "<**>\n".to_owned();
+    if data.len() > 0 {
+
+        let path = "database/user-credentials.txt";
+        let (username, password) = parser::split_credentials(data);
+        let mut credentials = "<**>\n".to_owned();
 
 
-    if !dublicate_username(path.to_string(), username.clone()) {
+        if !dublicate_username(path.to_string(), username.clone()) {
 
-        credentials.push_str("username::");
-        credentials.push_str(&username);
-        credentials.push_str("\n");
-        credentials.push_str("password::");
-        credentials.push_str(&password);
-        credentials.push_str("\n");
-        credentials.push_str("ID::");
-        credentials.push_str(&next_id(path.to_string()));
-        credentials.push_str("\n");
+            credentials.push_str("username::");
+            credentials.push_str(&username);
+            credentials.push_str("\n");
+            credentials.push_str("password::");
+            credentials.push_str(&password);
+            credentials.push_str("\n");
+            credentials.push_str("ID::");
+            credentials.push_str(&next_id(path.to_string()));
+            credentials.push_str("\n");
 
-        file_io::write_file(path.to_string(), credentials.to_owned());
+            file_io::write_file(path.to_string(), credentials.to_owned());
 
-        format!("sign_up_state::OK**")
+            format!("sign_up_state::OK**")
+
+        }
+        else {
+
+            format!("sign_up_state::Dublicate**")
+        }
 
     }
     else {
 
-        format!("sign_up_state::Dublicate**")
+        format!("sign_up_state::Unauthorised**")
     }
 
 }
