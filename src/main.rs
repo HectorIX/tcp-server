@@ -34,11 +34,14 @@ impl Decoder for LineCodec {
     type Error = io::Error;
 
     fn decode(&mut self, buf: &mut BytesMut) -> io::Result<Option<String>> {
-        if let Some(i) = buf.iter().position(|&b| b == b'\n') {
+        let mut i;
+        if buf.len() > 0 {
+
+            i = buf.len();
             // remove the serialized frame from the buffer.
             let line = buf.split_to(i);
 
-            // Also remove the '\n'
+            // Also remove the '\n' ??????
             buf.split_to(1);
 
             // Turn this data into a UTF string and return it in a Frame.

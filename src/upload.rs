@@ -18,5 +18,5 @@ pub fn upload_service(data:String) -> String {
 
     file_io::write_file(path, file_context);
 
-    "Upload completed!".to_string()
+    "upload_state::OK**".to_string()
 }
