@@ -19,6 +19,7 @@ use tokio_proto::pipeline::ServerProto;
 mod service_state;
 mod encryptor_services_list;
 mod parser;
+mod user;
 mod file_io;
 mod sign_up;
 mod sign_in;

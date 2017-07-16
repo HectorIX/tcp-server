@@ -3,37 +3,13 @@ extern crate rand;
 
 use parser;
 use file_io;
+use user;
 
 use std::str;
-use std::default::Default;
 
 use self::rand::{ thread_rng, Rng };
 use self::crypto::whirlpool::Whirlpool;
 use self::crypto::digest::Digest;
-
-
-#[derive(Default)]
-pub struct User {
-
-    username : String,
-    session_key : String,
-}
-
-
-impl User {
-
-    fn get_username(&self) -> &String {
-
-        &self.username
-    }
-
-    fn get_session_key(&self) -> &String {
-
-        &self.session_key
-    }
-
-}
-
 
 
 
@@ -48,13 +24,13 @@ pub fn sign_in_service(credentials:String) -> String {
 
         if verify_user(path.to_string(), username.clone(), password) {
 
-            let mut verified_user = User::default();
+            user::set_username(username);
+            user::set_session_key(session_key_maker());
+            user::set_user_status(true);
 
-            verified_user.username = username.clone();
-            verified_user.session_key = session_key_maker();
 
-            format!("sign_in_state::OK**{}--{}", verified_user.get_session_key()
-                                               , verified_user.get_username())
+            format!("sign_in_state::OK**{}--{}", user::get_session_key()
+                                               , user::get_username())
 
         }
         else {
