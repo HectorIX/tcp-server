@@ -1,8 +1,14 @@
+use std::fs;
+
 use file_io;
 use parser;
 
 
 pub fn sign_up_service(data:String) -> String {
+
+
+    let mut user_folder = "private_data/".to_string();
+
 
     if data.len() > 0 {
 
@@ -22,6 +28,15 @@ pub fn sign_up_service(data:String) -> String {
             credentials.push_str("ID::");
             credentials.push_str(&next_id(path.to_string()));
             credentials.push_str("\n");
+
+
+            user_folder.push_str(&username);
+
+            match fs::create_dir(user_folder) {
+
+                Err(e) => println!("Failed to create folder: {:?}", e.kind()),
+                Ok(_)  => {},
+            }
 
             file_io::write_file(path.to_string(), credentials.to_owned());
 
