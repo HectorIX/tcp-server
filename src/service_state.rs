@@ -29,9 +29,6 @@ pub fn state( client_request:String ) -> String {
         "download_state" => {
             encryptor_services_list::service_list(the_request)
         },
-        "integrity_state" => {
-            encryptor_services_list::service_list(the_request)
-        }
         _ => {
             "Undefined State...".to_string()
         },

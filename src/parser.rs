@@ -59,3 +59,12 @@ pub fn split_filename_from_context(data:String) -> (String, String)  {
 
     (filename, file_context)
 }
+
+
+pub fn split_session_key(data:String) -> (String, String)  {
+
+    let data_vector: Vec<&str> = data.split("#!?#").collect();
+    let (session_key, file_data) = (data_vector[0].to_owned(), data_vector[1].to_owned());
+
+    (session_key, file_data)
+}

@@ -104,13 +104,16 @@ impl Service for Encryptor {
 
     // Produce a future for computing a response from a request.
     fn call(&self, req: Self::Request) -> Self::Future {
+
         // In this case, the response is immediate.
         println!("{:?}", req );
 
         if parser::parser(req.to_owned()) {
+
             future::ok(service_state::state(req)).boxed()
         }
         else {
+
             future::ok(">".to_owned()).boxed()
         }
 
