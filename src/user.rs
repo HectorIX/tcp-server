@@ -58,8 +58,7 @@ pub fn get_session_key() -> String {
     session_key
 }
 
-pub fn get_user_status() -> bool {
-
-    let status = USER.lock().unwrap().active.clone();
-    status
-}
+//pub fn get_user_status() -> bool {
+//    let status = USER.lock().unwrap().active.clone();
+//    status
+//}
