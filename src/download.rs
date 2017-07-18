@@ -22,18 +22,27 @@ pub fn download_service( data: String ) -> String {
         if (username == user::get_username()) &
            (session_key == user::get_session_key()) {
 
-            let file_context = file_io::read_file(path.to_string());
 
             let mut file_request = "download_state::OK**".to_string();
+            let file_context = file_io::read_file(path.to_string());
 
 
-            file_request.push_str(&user::get_session_key());
-            file_request.push_str("#!?#");
-            file_request.push_str(&filename);
-            file_request.push_str("<$$>");
-            file_request.push_str(&file_context);
+            if !file_context.starts_with("**Failed") {
+
+                file_request.push_str(&user::get_session_key());
+                file_request.push_str("#!?#");
+                file_request.push_str(&filename);
+                file_request.push_str("<$$>");
+                file_request.push_str(&file_context);
+
+            }
+            else {
+
+                file_request = "download_state::Failure**".to_string();
+            }
 
             file_request
+
         }
         else {
 
