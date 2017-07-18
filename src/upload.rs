@@ -23,8 +23,17 @@ pub fn upload_service(data:String) -> String {
         if (username == user::get_username()) &
            (session_key == user::get_session_key()) {
 
-            file_io::write_file(path, file_context);
-            "upload_state::OK**".to_string()
+            let up = file_io::write_file(path, file_context);
+
+            if !up.starts_with("**Failed") {
+
+                "upload_state::OK**".to_string()
+            }
+            else {
+
+                "upload_state::Failure**".to_string()
+            }
+
          }
          else {
 
