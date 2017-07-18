@@ -16,8 +16,8 @@ pub fn sign_up_service(data:String) -> String {
         let (username, password) = parser::split_credentials(data);
         let mut credentials = "<**>\n".to_owned();
 
-        if !username.starts_with("--UNCONFIRMED--") &
-           !password.starts_with("--UNCONFIRMED--")
+        if !username.starts_with("UNCONFIRMED") &
+           !password.starts_with("UNCONFIRMED")
         {
 
 
