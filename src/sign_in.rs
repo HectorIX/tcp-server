@@ -22,6 +22,7 @@ pub fn sign_in_service(credentials:String) -> String {
         let (username,password) = parser::split_credentials(credentials);
 
 
+
         if verify_user(path.to_string(), username.clone(), password) {
 
             user::set_username(username);

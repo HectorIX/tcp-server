@@ -15,21 +15,27 @@ pub fn state( client_request:String ) -> String {
     match the_state.as_ref() {
 
         "informatic_state" => {
+
             encryptor_services_list::service_list(the_request)
         },
         "sign_up_state" => {
+
             encryptor_services_list::service_list(the_request)
         },
         "sign_in_state" => {
+
             encryptor_services_list::service_list(the_request)
         }
         "upload_state" => {
+            
             encryptor_services_list::service_list(the_request)
         },
         "download_state" => {
+
             encryptor_services_list::service_list(the_request)
         },
         _ => {
+
             "Undefined State...".to_string()
         },
 

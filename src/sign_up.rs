@@ -16,45 +16,55 @@ pub fn sign_up_service(data:String) -> String {
         let (username, password) = parser::split_credentials(data);
         let mut credentials = "<**>\n".to_owned();
 
-
-        if !dublicate_username(path.to_string(), username.clone()) {
-
-            credentials.push_str("username::");
-            credentials.push_str(&username);
-            credentials.push_str("\n");
-            credentials.push_str("password::");
-            credentials.push_str(&password);
-            credentials.push_str("\n");
-            credentials.push_str("ID::");
-            credentials.push_str(&next_id(path.to_string()));
-            credentials.push_str("\n");
+        if !username.starts_with("--UNCONFIRMED--") &
+           !password.starts_with("--UNCONFIRMED--")
+        {
 
 
-            user_folder.push_str(&username);
+            if !dublicate_username(path.to_string(), username.clone()) {
 
-            match fs::create_dir(user_folder) {
+                credentials.push_str("username::");
+                credentials.push_str(&username);
+                credentials.push_str("\n");
+                credentials.push_str("password::");
+                credentials.push_str(&password);
+                credentials.push_str("\n");
+                credentials.push_str("ID::");
+                credentials.push_str(&next_id(path.to_string()));
+                credentials.push_str("\n");
 
-                Err(e) => println!("Failed to create folder: {:?}", e.kind()),
-                Ok(_)  => {},
-            }
+
+                user_folder.push_str(&username);
+
+                match fs::create_dir(user_folder) {
+
+                    Err(e) => println!("Failed to create folder: {:?}", e.kind()),
+                    Ok(_)  => {},
+                }
 
 
-            let cred = file_io::write_file(path.to_string(), credentials.to_owned());
+                let cred = file_io::write_file(path.to_string(), credentials.to_owned());
 
 
-            if !cred.starts_with("**Failed") {
+                if !cred.starts_with("**Failed") {
 
-                format!("sign_up_state::OK**")
+                    format!("sign_up_state::OK**")
+                }
+                else {
+
+                    format!("sign_up_state::Failure**")
+                }
+
             }
             else {
 
-                format!("sign_up_state::Failure**")
+                format!("sign_up_state::Dublicate**")
             }
 
         }
         else {
 
-            format!("sign_up_state::Dublicate**")
+            format!("sign_up_state::UNCONFIRMED**")
         }
 
     }
