@@ -7,7 +7,7 @@ use std::fs::{OpenOptions};
 // If the file does not extist, create it.
 // The first argument (filename:String) is the name of the file
 // and the second argument (message:String) is the message will be stored.
-pub fn write_file( filename:String, context:String ) {
+pub fn write_file( filename:String, context:String ) -> String {
 
 
     // Create the File if not already exists.
@@ -18,23 +18,18 @@ pub fn write_file( filename:String, context:String ) {
                                     .append(true)
                                     .open(&filename) {
 
-        Err(failure) => panic!("System failed to create File {} because of: {}",
-                        filename,
-                        failure.description()
-                    ),
+        Err(failure) => { return format!("**Failed: {}", failure.description()); },
         Ok(file) => file,
     };
 
     // Write the context into the file.
     match file.write_all(context.as_bytes()) {
 
-        Err(failure) => {
-                panic!("Couldn't write to {}: {}", filename
-                                                 , failure.description())
-                },
+        Err(failure) => { return format!("**Failed {}", failure.description()); },
         Ok(_) => println!("Message successfully stored into {}.", filename),
     }
 
+    "OK".to_string()
 }
 
 
@@ -49,10 +44,7 @@ pub fn read_file( filename:String ) -> String {
                                      .read(true)
                                      .open(&filename) {
 
-        Err(failure) => panic!("System failed to create File {} because of: {}",
-                                filename,
-                                failure.description()
-                              ),
+        Err(failure) => { return format!("**Failed {}", failure.description()); },
         Ok(file) => file,
     };
 
@@ -63,10 +55,7 @@ pub fn read_file( filename:String ) -> String {
     // Read the file and store it in context.
     match file.read_to_string(&mut context) {
 
-        Err(failure) => {
-                panic!("Couldn't read from {}: {}", filename
-                                                  , failure.description())
-                },
+        Err(failure) => { return format!("**Failed {}", failure.description()) },
         Ok(_) => println!("Message successfully read from {}.", filename),
     };
 
