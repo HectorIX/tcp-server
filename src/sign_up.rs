@@ -38,9 +38,18 @@ pub fn sign_up_service(data:String) -> String {
                 Ok(_)  => {},
             }
 
-            file_io::write_file(path.to_string(), credentials.to_owned());
 
-            format!("sign_up_state::OK**")
+            let cred = file_io::write_file(path.to_string(), credentials.to_owned());
+
+
+            if !cred.starts_with("**Failed") {
+
+                format!("sign_up_state::OK**")
+            }
+            else {
+
+                format!("sign_up_state::Failure**")
+            }
 
         }
         else {
@@ -60,20 +69,36 @@ pub fn sign_up_service(data:String) -> String {
 
 fn dublicate_username(path:String, username:String) -> bool {
 
+
     let file_context = file_io::read_file(path);
-    let vector_of_users: Vec<&str> = file_context.split("<**>\n")
-                                                 .collect();
 
-    for user_data in vector_of_users {
 
-        if user_data.to_string().contains(username.as_str()) {
 
-            return true;
+    if !file_context.starts_with("**Failed") {
+
+        let vector_of_users: Vec<&str> = file_context.split("<**>\n")
+                                                     .collect();
+
+        for user_data in vector_of_users {
+
+            if user_data.to_string().contains(username.as_str()) {
+
+                return true;
+            }
         }
+
+        false
+
+    }
+    else {
+
+        false
     }
 
-    false
+
 }
+
+
 
 fn next_id(path:String) -> String {
 
